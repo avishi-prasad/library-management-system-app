@@ -33,6 +33,7 @@
 ## Additional features
 - Download e-books as PDF for a price (dummy payment portal)
 
-
+## Notes
+This project was developed as part of coursework for the BS in Data Science program at IIT Madras and reflects independent implementation and learning.
 
 
