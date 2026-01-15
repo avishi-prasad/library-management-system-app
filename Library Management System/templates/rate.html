@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="/static/user_style.css" >
+    <style>
+        input[type="radio"] + label {
+            color: #FFD700;
+            font-size: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: left;">
+        <img src="/static/app-logo.png" height="40px" width="40px">  My Library
+        <span style="float: right;"><img src="/static/account-icon.png" height="27px" width="27px"> Account: {{username}}</span>
+    </h1>
+    <h2> <a href="/user_dashboard/{{username}}"><span title="Find all books here."> Book Shelf</span></a> | <a href='/{{username}}/profile'> <span title="Read here.">Reading Room</span></a> | <a href="/user_stats/{{username}}"><span title="See the overall performance of the app." >Stats</span></a> | <a href="/"> <span title="Logout"> Logout</span></a></h2>
+    <h3 style="font-size: 27px;">Let us know your feedback!</h3><br>
+    <div class="book">
+        <img class="image" src={{book.Cover}} height="200" alt="{{book.Title}} cover">
+        <div class="details">
+            <h3>{{book.Title}}</h3>
+            <p><b>Authors:</b> {{book.Authors}}</p>
+            <p><b>Genre:</b> {{book.Section}}</p>
+            <p><b>No. of Pages:</b> {{book.Pages}}</p>
+        </div>
+    </div>
+    <div>
+        <form action="/rate/{{username}}/{{book.Book_id}}" method="POST" style="text-align: center;" >
+            <div>
+                <input type="radio" name="rating" value="1" id="rating-1" required/>
+                <label for="rating-1">&#9733;</label>
+                <input type="radio" name="rating" value="2" id="rating-2" required />
+                <label for="rating-2" >&#9733;&#9733;</label>
+                <input type="radio" name="rating" value="3" id="rating-3" required/>
+                <label for="rating-3" >&#9733;&#9733;&#9733;</label>
+                <input type="radio" name="rating" value="4" id="rating-4" required/>
+                <label for="rating-4" >&#9733;&#9733;&#9733;&#9733;</label>
+                <input type="radio" name="rating" value="5" id="rating-5" required/>
+                <label for="rating-5" >&#9733;&#9733;&#9733;&#9733;&#9733;</label>
+                <br><br>
+                <input class="btn" type="submit" value="Submit feedback">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

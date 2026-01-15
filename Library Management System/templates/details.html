@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="/static/admin_style.css" >
+</head>
+<body>
+    <h1 style="text-align: left;">
+        <img src="/static/app-logo.png" height="40px" width="40px">  My Library
+        <span style="float: right;"><img src="/static/account-icon.png" height="27px" width="27px"> Admin Dashboard</span>
+    </h1>
+    <h2><a href='/admin_dashboard'> <span title="Find all requested and issued books here."> Home</span></a> | <a href="/admin_books"><span title="Find all available books here"> Books</span></a> | <a href="/admin_stats"><span title="See the overall performance of the library">Stats</span></a> | <a href="/"><span title="Logout"> Logout</span></a></h2>
+    <h3 style="font-size: 27px;">Book Details: </h3>
+    <div class="book" style="margin-left: 250px;">
+        <img class="image" src={{book.Cover}} height="250" alt="{{book.Title}} cover">
+        <div class="details" style="margin-left: 50px;">
+            <h3>Title: {{book.Title}}</h3>
+            <p><b>Authors:</b> {{book.Authors}}<br>
+            <br><b>Genre:</b> {{book.Section}}<br>
+            <br><b>No. of Pages:</b> {{book.Pages}}<br>
+            <br><b>Rating: </b>{% if rating %}{{rating}}{% else %}No Ratings{% endif %}<br>
+            <br><b>Actions: </b><a href="/book/{{book.Book_id}}">Content</a>
+            <br><a href="/del_book/{{book.Title}}">Delete Book</a>
+            <br><a href="/edit_book/{{book.Title}}">Edit Book</a>
+        </div>
+    </div>
+    <h3 style="font-size: 25px; text-align: center;"><u>Issued to: </u></h3>
+    <div>
+    {% if issued|length==0 %}
+        <p style="text-align: center; font-size: 15px;">This book is not issued to any user currently!</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>User_id</th>
+                        <th>Date Issued</th>
+                        <th>Return Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in issued %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{i.User_id}}</td>
+                        <td>{{i.Date_issued}}</td>
+                        <td>{{i.Return_date}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>

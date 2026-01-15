@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>My Library</title>
+        <link rel="stylesheet" href="/static/admin_style.css" >
+    </head>
+    <body>
+        <h1 style="text-align: left;">
+            <img src="/static/app-logo.png" height="40px" width="40px">  My Library
+            <span style="float: right;"><img src="/static/account-icon.png" height="27px" width="27px"> Admin Dashboard</span>
+        </h1>
+        <h2><span title="Find all requested and issued books here."> Home</span> | <a href="/admin_books"><span title="Find all available books here"> Books</span></a> | <a href="/admin_stats"><span title="See the overall performance of the library">Stats</span></a> | <a href="/"><span title="Logout"> Logout</span></a></h2>
+        <div>
+            <h3 style="text-align: center;"><u>Requests</u></h3>
+            {% if requests|length==0 %}
+            <p style="text-align: center; font-size: 15px;">There are no requests.</p>
+            {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Book Title</th>
+                        <th>User id</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in requests %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{i.Book_title}}</td>
+                        <td>{{i.User_id}}</td>
+                        <td><a href="/grant/{{i.Book_title}}/{{i.User_id}}">Grant</a> <a href="/reject/{{i.Book_title}}/{{i.User_id}}">Reject</a> </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+        <br>
+        <br>
+        <div>
+        <h3 style="text-align: center;"><u>Currently Issued Books</u></h3>
+            {% if issues|length==0 %}
+            <p style="text-align: center; font-size: 15px;">No books issued to any user currently!</p>
+            {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Book Title</th>
+                        <th>User id</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in issues %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{i["Book Title"]}}</td>
+                        <td>{{i["User_id"]}}</td>
+                        <td><a href='/revoke/{{i["Book Title"]}}/{{i["User_id"]}}'>Revoke</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+        <br><br>
+        <div><h3 style="text-align: center;"><u>Sections Created</u></h3>
+            {% if sections|length==0 %}
+            <p style="text-align: center; font-size: 15px;">No sections created yet. <a href="/add_section"> Add Section now!</a></p>
+            {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Section ID</th>
+                        <th>Section Name</th>
+                        <th>Description</th>
+                        <th>Date of Creation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in sections %}
+                    <tr>
+                        <td>{{i.Sec_id}}</td>
+                        <td>{{i.Name}}</td>
+                        <td>{{i.Description}}</td>
+                        <td>{{i.Date_of_creation}}</td>
+                        <td><a href='/delete/{{i.Name}}'>Delete Section</a><br><br> <a href='/edit/{{i.Name}}'>Edit Section</a> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </body>
+</html>

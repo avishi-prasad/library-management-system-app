@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="/static/user_style.css" >
+</head>
+<body>
+    <h1 style="text-align: left;">
+        <img src="/static/app-logo.png" height="27px" width="27px">  My Library
+        <span style="float: right;"><img src="/static/account-icon.png" height="40px" width="40px"> Account: {{username}}</span>
+    </h1>
+    <h2> <a href="/user_dashboard/{{username}}"><span title="Find all books here."> Book Shelf</span></a> | <a href='/{{username}}/profile'> <span title="Read here.">Reading Room</span></a> | <a href="/user_stats/{{username}}"><span title="See the overall performance of the app." >Stats</span></a> | <a href="/"> <span title="Logout"> Logout</span></a></h2>
+    <div style="text-align: center;">
+        <p style="font-size: 20px;"><b>Pay to Download :</b></p>
+        <form action="/pay/{{username}}/{{book_id}}/{{price}}" method="POST">
+            <img src={{cover}} height="200px"/>
+            <p><b>Book Title:</b>{{book_title}}</p>
+            <p><b>Price:</b> Rs.{{price}}</p>
+            <input type="submit" value="Pay Rs.{{price}}"/>
+        </form>
+    </div>
+</body>
+</html>

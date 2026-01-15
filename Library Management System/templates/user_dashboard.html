@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>My Library</title>
+        <link rel="stylesheet" href="/static/user_style.css" >
+    </head>
+    <body>
+        <h1 style="text-align: left;">
+            <img src="/static/app-logo.png" height="40px" width="40px">  My Library
+            <span style="float: right;"><img src="/static/account-icon.png" height="27px" width="27px"> Account: {{username}}</span>
+        </h1>
+        <h2><span title="Find all books here."> Book Shelf</span> | <a href='/{{username}}/profile'> <span title="Read here."> Reading Room</span></a> | <a href="/user_stats/{{username}}"><span title="See the overall performance of the app." >Stats</span></a> | <a href="/"> <span title="Logout"> Logout</span></a></h2>
+        <div>
+            <div style="float: left;">
+            {% if sections|length==0 %}
+            No Sections created yet!
+            {% else %}
+            <form action="/{{username}}/books/section" method="POST" id="sectionform" enctype="multipart/form-data" >
+            <label><b>Explore by Section:</b></label>
+            <select id="section" name="section">
+            <option value="">Select an option</option>
+            <option value="all_books">Book List</option>
+            {% for i in sections %}
+            <option value={{i.Name}}>{{i.Name}}</option>
+            {% endfor %}
+            </select>
+            <br>
+            <br>
+            </form>
+            <script>
+                document.getElementById('section').addEventListener('change', function() {
+                    document.getElementById('sectionform').submit();
+                });
+            </script>
+            {% endif %}
+            </div>
+            <div style="float: right;">
+                <form action="/search/{{username}}" method="POST">
+                    <label for="search"><b>Search:</b></label>
+                    <input type="text" id="search" name="search" placeholder="Search by book title/author" required>
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 70px;">
+            {% if books|length==0 %}
+            <p style="text-align:center ; font-size: 20px;">No books added yet!</p>
+            <br>
+            {% else %}
+            <h2 style="text-align: left; background-color: #f08080;"><b><span title="{{desc}}"> {{section}}</span></b></h2>
+            {% for i in books %}
+            <div class="book">
+                <img class="image" src={{i.Cover}} height="200" alt="{{i.Title}} cover">
+                <div class="details">
+                    <h3>{{i.Title}}</h3>
+                    <p><b>Authors:</b> {{i.Authors}}</p>
+                    <p><b>Genre:</b> {{i.Section}}</p>
+                    <p><b>No. of Pages:</b> {{i.Pages}}</p>
+                    <p><b>Ratings: </b>
+                        {% for r in book_ratings %}
+                        {% if r["Book Title"]==i.Title %}
+                        {{r["Avg Rating"]}} <span style="color: #FFD700;"> &#9733;</span>
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    
+                    <p><a href='/request/{{username}}/{{i.Title}}'>Request Book</a> </p>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>

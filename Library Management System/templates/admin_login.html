@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="'en">
+    <head>
+        <meta charset="utf-8">
+        <title>My Library</title>
+        <link rel="stylesheet" href="./static/login_style.css" >
+    </head>
+    <body>
+        <div><h1 style="text-align: center; margin-top: 130px;"><img src="/static/app-logo.png" height="40px" width="40px"> My Library</h1></div>
+        <div class="adminlogin">
+        <h2 style="text-align: center;">Admin Login</h2>
+        <form action="/admin_logged_in" method="POST" id="login_form">
+        <div style="text-align: center;">
+            <label>Admin name</label>
+            <input type="text" name="adminname"/>
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <label>Password</label>
+            <input type="text" name="pass" />
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <input type="submit" value="Login" >
+        </div>
+    </form>
+    </div>
+    </body>
+</html>

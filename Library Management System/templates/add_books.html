@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>My Library</title>
+        <link rel="stylesheet" href="./static/admin_style.css" >
+    </head>
+    <body>
+        <h1 style="text-align: left;">
+            <img src="/static/app-logo.png" height="40px" width="40px">  My Library
+            <span style="float: right;"><img src="/static/account-icon.png" height="27px" width="27px"> Admin Dashboard</span>
+        </h1>
+        <h2><a href='/admin_dashboard'> <span title="Find all requested and issued books here."> Home</span></a> | <a href="/admin_books"><span title="Find all available books here"> Books</span></a> | <a href="/admin_stats"><span title="See the overall performance of the library">Stats</span></a> | <a href="/"><span title="Logout"> Logout</span></a></h2>
+        <div>
+            <h3 style="text-align: center;">
+                Add Book Details:
+            </h3>
+        </div>
+        <div style="text-align: center;">
+            <form action="/add_books" method="POST" enctype="multipart/form-data" >
+                <label>Title</label>
+                <input type="text" name="title" placeholder="Enter book name" required/>
+                <br>
+                <br>
+                <label>Author</label>
+                <input type="text" name="author" placeholder="Enter author's name" required/>
+                <br>
+                <br>
+                <label><span title="Attach book in PDF format">Content</span></label>
+                <input type="file"  name="content" accept=".pdf" required/>
+                <br>
+                <br>
+                <label>Book Cover</label>
+                <input type="text" name="image" placeholder="Enter image link" required/>
+                <br>
+                <br>
+                <label>Section</label>
+                <select name="section">
+                    {% for i in sections %}
+                    <option value={{i.Name}}>{{i.Name}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <br>
+                <input type="submit" name="submit" value="Add Book" />
+            </form>
+        </div>
+    </body>
+</html>
+

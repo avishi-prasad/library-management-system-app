@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="/static/user_style.css" >
+</head>
+<body>
+    <h1 style="text-align: left;">
+        <img src="/static/app-logo.png" height="40px" width="40px">  My Library
+        <span style="float: right;"><img src="/static/account-icon.png" height="27px" width="27px"> Account: {{username}}</span>
+    </h1>
+    <h2> <a href="/user_dashboard/{{username}}"><span title="Find all books here.">Book Shelf</span></a> | <a href='/{{username}}/profile'><span title="Read here.">Reading Room</span></a> | <a href="/user_stats/{{username}}"><span title="See the overall performance of the app." >Stats</span></a> | <a href="/"> <span title="Logout"> Logout</span></a></h2>
+    <div>
+       <p style="text-align: center; font-size: 20px;"><span style="color: red; font-size: 30px;">⚠ </span>You've reached your maximum limit! Five books already requested currently.</p>
+       <p style="text-align: center;"><a href='/user_dashboard/{{username}}'>View other books</a> | <a href='/{{username}}/profile'>View requested books</a>
+    </div>
+</body>
+</html>

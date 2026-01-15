@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="/static/user_style.css" >
+</head>
+<body>
+    <h1 style="text-align: left;">
+        <img src="/static/app-logo.png" height="40px" width="40px">  My Library
+        <span style="float: right;"><img src="/static/account-icon.png" height="27px" width="27px"> Account: {{username}}</span>
+    </h1>
+    <h2> <a href="/user_dashboard/{{username}}"><span title="Find all books here."> Book Shelf</span></a> | <span title="Read here.">Reading Room</span> | <a href="/user_stats/{{username}}"><span title="See the overall performance of the app." >Stats</span></a> | <a href="/"> <span title="Logout"> Logout</span></a></h2>
+    <div style="float: right;">
+        <form action="/search/{{username}}" method="POST">
+            <label for="search"><b>Search:</b></label>
+            <input type="text" id="search" name="search" placeholder="Search by book title/author" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div>
+        {% if req|length==0 %}
+        <h3><u>Your Requests</u></h3>
+        {% else %}
+        <h3><u>Your Pending Requests !</u></h3>
+        <table>
+            <tr>
+                <th style="width: 20px;"><b>S.No.</b></th>
+                <th style="width: 100px;"><b>Book Title</b></th>
+                <th style="width: 100px;"><b>Authors</b></th>
+                <th style="width: 100px;"><b>Actions</b></th>
+            </tr>
+            
+            {% for i in req %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{i["Book Title"]}}</td>
+                <td>{{i["Book Author"]}}</td>
+                <td><a href="/delete/request/{{username}}/{{i['Book Title']}}">Delete Request</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p> <span style="font-size: 20px;">⏳</span>Your books will appear here soon <b> &#x2193; </b><br></p>
+        {% endif %}
+    </div>
+    {% if rejected_book %}
+    <p><span style="color: red; font-size: 30px;">⚠ </span>Your last requested book '{{rejected_book}}' is not available at the moment.</p>
+    {% endif %}
+    <br>
+    <br>
+    <div>
+        <h3><u>Your Issued Books</u></h3>
+        {% if issued|length==0 %}
+        <p>No books issued to you currently!</p>
+        {% else %}
+        <table>
+            <tr>
+                <th style="width: 20px;"><b>S.No.</b></th>
+                <th style="width: 100px;"><b>Book Title</b></th>
+                <th style="width: 100px;"><b>Authors</b></th>
+                <th style="width: 100px;"><b>Return Date</b></th>
+                <th style="width: 100px;"><b>Actions</b></th>
+            </tr>
+            
+            {% for i in issued %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{i["Book Title"]}}</td>
+                <td>{{i["Book Author"]}}</td>
+                <td>{{i["Return_date"]}}</td>
+                <td><a href='/book/{{i["Book id"]}}'>Read</a> <a href='/return/{{username}}/{{i["Book id"]}}'>Return</a> <a href='/rate/{{username}}/{{i["Book id"]}}'>Give</a><span style="color: #FFD700; font-size: 20px;"> &#9733;</span> <a href='/download/{{username}}/{{i["Book id"]}}'>Download</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    <br>
+    <br>
+    <div>
+        {% if d_books|length==0 %}
+        
+        {% else %}
+        <h3><u>Your Book Shelf (Already Downlaoded)</u></h3>
+        <table>
+            <tr>
+                <th style="width: 20px;"><b>S.No.</b></th>
+                <th style="width: 100px;"><b>Book Title</b></th>
+                <th style="width: 100px;"><b>Authors</b></th>
+                <th style="width: 100px;"><b>No. of Pages</b></th>
+                <th style="width: 100px;"><b>Actions</b></th>
+            </tr>
+            
+            {% for i in d_books %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{i.Title}}</td>
+                <td>{{i.Authors}}</td>
+                <td>{{i.Pages}}</td>
+                <td><a href='/book/{{i.Book_id}}'>Read</a> 
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    <br>
+    <br>
+    <div>
+        {% if returns|length==0 %}
+    
+        {% else %}
+        <h3><u>Your Returned Books</u></h3>
+        <table>
+            <tr>
+                <th style="width: 20px;"><b>S.No.</b></th>
+                <th style="width: 100px;"><b>Book Title</b></th>
+                <th style="width: 100px;"><b>Authors</b></th>
+                <th style="width: 100px;">Actions</th>
+            </tr>
+            
+            {% for i in returns %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{i.Title}}</td>
+                <td>{{i.Authors}}</td>
+                <td><a href='/request/{{username}}/{{i.Title}}'>Request Book</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    
+</body>
+</html>

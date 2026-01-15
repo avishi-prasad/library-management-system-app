@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="'en">
+    <head>
+        <meta charset="utf-8">
+        <title>My Library</title>
+        <link rel="stylesheet" href="./static/login_style.css" >
+    </head>
+    <body>
+        <div><h1 style="text-align: center; margin-top: 130px;"><img src="/static/app-logo.png" height="40px" width="40px"> My Library</h1></div>
+        <div class="login_as">
+        <h2 style="text-align: center;">Login As :</h2>
+        <form action="/login_as" method="POST" id="login_as_form" style="text-align: center;" >
+            <div>
+                <input type="radio" name="role" value="user" required/>
+                <label style="font-size: 25px;">User</label>
+                <input type="radio" name="role" value="librarian" required/>
+                <label style="font-size: 25px;">Admin</label>
+            <br>
+            <br>
+                <input type="submit" value = "Submit">
+            </div>
+    
+        </form>
+        </div>
+    </body>
+</html>
