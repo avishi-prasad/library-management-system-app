@@ -1,5 +1,7 @@
 # Library Management System
 
+## **App Name** : My Library
+
 ## Description
 - It is a multi-user app (one required librarian and other general users/students)
 - Used for issuing e-books to users
